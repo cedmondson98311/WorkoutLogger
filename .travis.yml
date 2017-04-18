@@ -1,2 +1,8 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key: b23eb9c8-bf12-4506-b0d9-d0d0ab6983c6
+  app: fast-island-62660
+  on:
+    repo: cedmondson98311/WorkoutLogger
