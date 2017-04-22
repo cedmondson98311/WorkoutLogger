@@ -4,7 +4,7 @@ app.use(express.static('views'));
 app.listen(process.env.PORT || 8080);
 
 app.get('/user/logs', (req, res) => {
-	res.sendFile(__dirname + '/views/view_logs.html')
+	res.sendFile(__dirname + '/view_logs.html')
 });
 
 app.get('/user/start', (req, res) => {
