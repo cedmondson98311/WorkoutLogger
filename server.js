@@ -8,7 +8,7 @@ app.get('/user/logs', (req, res) => {
 });
 
 app.get('/user/start', (req, res) => {
-	res.sendFile(__dirname + '/views/start_workout.html')
+	res.sendFile(__dirname + '/views/start_workout.html');
 });
 
 app.get('/user/workout', (req, res) => {
