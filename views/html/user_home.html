@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Workout Logger - Index</title>
+	<title>Workout Logger - User Home</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -16,12 +17,46 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../js/user_home.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/user_home.css">
 </head>
 <body>
-<div class="container">
-<h1>Welcom to Workout Logger</h1>
-<p>Hello World from Workout Logger!</p>
-<a href="http://localhost:8080/user">CLICK HERE TO GO TO YOUR HOMEPAGE</a>
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+		<a href="#" class="navbar-brand">Workout Logger</a>
+		</div>
+		<div>
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="http://localhost:8080/user/user_home">Home</a></li>
+			<li><a href="http://localhost:8080/user/view_logs">Logs</a></li>
+			<li><a href="http://localhost:8080/user/start_workout">Start Workout</a></li>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3">
+		</div>
+		<div class="col-md-6">
+			<div id="calendar">
+				<h1>THIS IS A BIG PRETEND CALENDAR</h1>
+			</div>
+		</div>
+		<div class="col-md-3">
+		</div>
+	</div>
+	<h2>Your Last Workout</h2>
+	<table class="table table-striped latest-workout">
+		<thead>
+			<tr>
+				<th>Exercise</th>
+				<th>Sets (Reps x Weight)</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 </div>
 
 </body>

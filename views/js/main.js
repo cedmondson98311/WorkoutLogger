@@ -62,13 +62,13 @@ var mock_data = {
 			]
 		},
 		{
-			id:"111111",
+			id:"222222",
 			date:"December 18, 1995 03:24:00",
 			workout: [
 				{
-					name:"Bench Press",
-					equipment:"barbell",
-					category:"weight_reps",
+					name:"Pullups",
+					equipment:"bodyweight",
+					category:"reps_only",
 					notes:"",
 					sets:[
 							{

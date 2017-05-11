@@ -1,9 +1,189 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-</head>
-<body>
-<p>START SCREEN FOR WORKOUT</p>
-</body>
+   <head>
+      <title>Start Workout - Workout Logger</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <!-- JQUERY -->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <!-- BOOTSTRAP -->
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <!-- CSS -->
+      <link rel="stylesheet" type="text/css" href="../css/start_workout.css">
+      <!-- JAVASCRIPT -->
+      <script type="text/javascript" src="../js/start_workout.js"></script>
+   </head>
+   <body>
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <a href="#" class="navbar-brand">Workout Logger</a>
+            </div>
+            <div>
+               <ul class="nav navbar-nav">
+               <li><a href="http://localhost:8080/user/user_home">Home</a></li>
+               <li><a href="http://localhost:8080/user/view_logs">Logs</a></li>
+               <li class="active"><a href="http://localhost:8080/user/start_workout">Start Workout</a></li>
+            </div>
+         </div>
+      </nav>
+      <div class="container-fluid">
+         <form id="workout">
+            <div class="form-group row">
+               <label for="exercise" class="col-sm-2 col-form-label">Exercise</label>
+               <div class="col-sm-10">
+                  <input type="text" class="form-control" id="exercise" placeholder="e.g. Bench Press">
+               </div>
+            </div>
+            <div class="form-group row">
+               <div class="col-sm-3">
+               </div>
+               <div class="col-sm-6">
+                  <div class="form-check form-check-inline col-sm-4">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="category" id="inlineRadio1" value="weight_and_reps" checked> Weight and Reps
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline col-sm-4">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="category" id="inlineRadio2" value="reps_only">Reps Only
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline col-sm-4">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="category" id="inlineRadio3" value="time">Time
+                     </label>
+                  </div>
+               </div>
+               <div class="col-sm-3"></div>
+            </div>
+            <fieldset class="form-group row">
+               <legend class="col-form-legend col-sm-2">Equipment</legend>
+               <div class="col-sm-10">
+                  <div class="form-check">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="equipment" id="barbell" value="barbell" checked>
+                     Barbell
+                     </label>
+                  </div>
+                  <div class="form-check">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="equipment" id="cable" value="cable">
+                     Cable
+                     </label>
+                  </div>
+                  <div class="form-check">
+                     <label class="form-check-label">
+                     <input class="form-check-input" type="radio" name="equipment" id="machine" value="machine">
+                     Machine
+                     </label>
+                  </div>
+               </div>
+            </fieldset>
+            <div class="form-group row">
+               <label for="notes" class="col-sm-2 col-form-label">Notes</label>
+               <div class="col-sm-10">
+                  <textarea type="text" class="form-control" id="notes">
+                  </textarea>
+               </div>
+            </div>
+         </form>
+         <button class="btn" id="add-exercise-button">Add Exercise</button>
+      </div>
+      <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12" id="log-holder">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Equipment</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="logs-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="sets-container row">
+            <div id="weight_and_reps">
+               <div class="form-group">
+                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="reps">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="weight">
+                  </div>
+               </div>
+               <button class="btn" id="add_set_button">Add Sets</button>
+            </div>
+            <div class="hidden" id="reps_only">
+               <div class="form-group">
+                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="reps">
+                  </div>
+               </div>
+            </div>
+            <div class="hidden" id="time">
+               <div class="form-group">
+                  <label for="reps" class="col-sm-2 col-form-label">Minutes</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="reps">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="weight" class="col-sm-2 col-form-label">Seconds</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="weight">
+                  </div>
+               </div>
+            </div>
+            </div>
+      </div>
+      <div class="modal fade" id="exampleModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="weight_and_reps">
+               <div class="form-group">
+                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="reps">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+                  <div class="col-sm-3">
+                     <input type="text" class="form-control" id="weight">
+                  </div>
+               </div>
+               <button class="btn" id="add_set_button" data-toggle="modal" data-target="#exampleModal">Add Set</button>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+   </body>
 </html>
