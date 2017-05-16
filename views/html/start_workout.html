@@ -7,12 +7,12 @@
       <!-- JQUERY -->
       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
       <!-- BOOTSTRAP -->
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <!-- Optional theme -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="../css/start_workout.css">
       <!-- JAVASCRIPT -->
@@ -33,58 +33,36 @@
          </div>
       </nav>
       <div class="container-fluid">
-         <form id="workout">
+         <form id="add-exercise-form">
             <div class="form-group row">
-               <label for="exercise" class="col-sm-2 col-form-label">Exercise</label>
-               <div class="col-sm-10">
+               <label for="exercise" class="col-sm-1 col-form-label">Exercise</label>
+               <div class="col-sm-11">
                   <input type="text" class="form-control" id="exercise" placeholder="e.g. Bench Press">
                </div>
             </div>
             <div class="form-group row">
-               <div class="col-sm-3">
-               </div>
-               <div class="col-sm-6">
-                  <div class="form-check form-check-inline col-sm-4">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="category" id="inlineRadio1" value="weight_and_reps" checked> Weight and Reps
-                     </label>
-                  </div>
-                  <div class="form-check form-check-inline col-sm-4">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="category" id="inlineRadio2" value="reps_only">Reps Only
-                     </label>
-                  </div>
-                  <div class="form-check form-check-inline col-sm-4">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="category" id="inlineRadio3" value="time">Time
-                     </label>
-                  </div>
-               </div>
-               <div class="col-sm-3"></div>
+              <div class="col-sm-6">
+                <label for='category-selection'>Category</label>
+                <select class="form-control" id="category-selection">
+                  <option>Reps and Weight</option>
+                  <option>Reps Only</option>
+                  <option>Time Only</option>
+                  <option>Reps and Time</option>
+                  <option>Cardio</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for='equipment-selection'>Equipment</label>
+                <select class="form-control" id="equpment-selection">
+                  <option>Barbell</option>
+                  <option>Dumbell</option>
+                  <option>Cable</option>
+                  <option>Machine</option>
+                  <option>Bands</option>
+                  <option>Body Weight</option>
+                </select>
+              </div>
             </div>
-            <fieldset class="form-group row">
-               <legend class="col-form-legend col-sm-2">Equipment</legend>
-               <div class="col-sm-10">
-                  <div class="form-check">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="equipment" id="barbell" value="barbell" checked>
-                     Barbell
-                     </label>
-                  </div>
-                  <div class="form-check">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="equipment" id="cable" value="cable">
-                     Cable
-                     </label>
-                  </div>
-                  <div class="form-check">
-                     <label class="form-check-label">
-                     <input class="form-check-input" type="radio" name="equipment" id="machine" value="machine">
-                     Machine
-                     </label>
-                  </div>
-               </div>
-            </fieldset>
             <div class="form-group row">
                <label for="notes" class="col-sm-2 col-form-label">Notes</label>
                <div class="col-sm-10">
@@ -97,93 +75,90 @@
       </div>
       <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-12" id="log-holder">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Exercise</th>
-                <th>Sets</th>
-                <th>Equipment</th>
-                <th>Notes</th>
-              </tr>
-            </thead>
-            <tbody id="logs-body">
-            </tbody>
-          </table>
-        </div>
+         <div class="col-sm-12" id="log-holder">
+            <table class="table table-striped" id="logs-table">
+               <thead>
+                  <tr>
+                     <th>Exercise</th>
+                     <th>Equipment</th>
+                     <th>Sets</th>
+                     <th>Notes</th>
+                  </tr>
+               </thead>
+               <tbody id="logs-body">
+               </tbody>
+            </table>
+         </div>
       </div>
-      <div class="sets-container row">
-            <div id="weight_and_reps">
-               <div class="form-group">
-                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="reps">
+      <!-- Button trigger modal -->
+      <!-- Modals -->
+      <div id="modal-holder">
+      <div class="modal fade" id="add-set-modal" tabindex="-1" role="dialog" aria-labelledby="Add Sets" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="add-set-modal-title"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="container-fluid">
+                     <form id="modal-form">
+                        <div class="row form-group">
+                           <div class="col-sm-1">
+                              <label for="reps" placeholder="Reps">Reps</label>
+                           </div>
+                           <div class="col-sm-2">
+                              <input type="text" id='reps-input-modal'>
+                           </div>
+                           <div class="col-sm-1">
+                              <label for="reps" placeholder="Weight">Weight</label>
+                           </div>
+                           <div class="col-sm-2">
+                              <input type="text" id='weight-input-modal'>
+                           </div>
+                        </div>
+                        <div class="row form-group">
+                           <div class="col-sm-2">
+                              <label  class="hidden" for="reps" placeholder="Reps"></label>
+                           </div>
+                           <div class="col-sm-4">
+                              <input  class="hidden" type="text" id='reps-input-modal'>
+                           </div>
+                           <div class="col-sm-2">
+                              <label class="hidden" for="reps" placeholder="Weight">Time</label>
+                           </div>
+                           <div class="col-sm-4">
+                              <input class="hidden" type="text" id='weight-input-modal'>
+                           </div>
+                        </div>
+                        <button type="submit" class="btn" id="add-set-button-modal">Add</button>
+                     </form>
+                  </div>
+                  <div class="row">
+                     <div class="col-sm-6">
+                        <table class="table table-striped" id="table-sets-modal">
+                           <thead>
+                              <tr>
+                                 <th>Reps</th>
+                                 <th>Weight</th>
+                              </tr>
+                           </thead>
+                           <tbody id="logs-body-modal">
+                           </tbody>
+                        </table>
+                     </div>
                   </div>
                </div>
-               <div class="form-group">
-                  <label for="weight" class="col-sm-2 col-form-label">Weight</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="weight">
-                  </div>
+               <div class="hidden" id="hidden-log-format-holder">
                </div>
-               <button class="btn" id="add_set_button">Add Sets</button>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="save-sets-modal" data-dismiss="modal">Save changes</button>
+               </div>
             </div>
-            <div class="hidden" id="reps_only">
-               <div class="form-group">
-                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="reps">
-                  </div>
-               </div>
-            </div>
-            <div class="hidden" id="time">
-               <div class="form-group">
-                  <label for="reps" class="col-sm-2 col-form-label">Minutes</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="reps">
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="weight" class="col-sm-2 col-form-label">Seconds</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="weight">
-                  </div>
-               </div>
-            </div>
-            </div>
+         </div>
       </div>
-      <div class="modal fade" id="exampleModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="weight_and_reps">
-               <div class="form-group">
-                  <label for="reps" class="col-sm-2 col-form-label">Reps</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="reps">
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="weight" class="col-sm-2 col-form-label">Weight</label>
-                  <div class="col-sm-3">
-                     <input type="text" class="form-control" id="weight">
-                  </div>
-               </div>
-               <button class="btn" id="add_set_button" data-toggle="modal" data-target="#exampleModal">Add Set</button>
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
    </body>
 </html>
