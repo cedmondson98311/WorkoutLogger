@@ -16,6 +16,10 @@ app.get('/',(req, res) => {
 	res.sendFile(__dirname + '/views/html/index.html')
 });
 
+app.get('/user',(req res) => {
+  res.sendFile(__dirname + '/views/html/user_home.html')
+});
+
 app.get('/user/user_home',(req, res) => {
 	res.sendFile(__dirname + '/views/html/user_home.html')
 });
