@@ -74,7 +74,18 @@ function addSet(index){
 	newSet.weight = $('#weight-input-modal').val();
 	newSet.time= $('#time-input-modal').val();
 
-	state.workout[index].sets.push(newSet);
+	var reps = $('#reps-input-modal').val();
+	var weight = $('#weight-input-modal').val();
+
+	var valid = validateInputSetsReps(reps,weight);
+	console.log('valid: ' + valid);
+
+	if(valid) {
+		state.workout[index].sets.push(newSet);
+	}
+	else {
+		$('#bad-input-warning-div').removeClass('hidden');
+	}
 }
 
 function removeSet(setIndex,exerciseId) {
@@ -104,11 +115,11 @@ function renderExercise(exercise) {
 	var exerciseEquipment = exercise.equipment;
 	var exerciseNotes = exercise.notes;
 	
-	var rowHTML = '<tr><td class="exercise-title">' + exerciseName + '</td><td>' + exerciseEquipment + '<td class="exercise-sets" data-id="' + exerciseId + '"></td><td>' + exerciseNotes + 
-		'</td><td><td><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-primary modify-set-button" data-toggle="modal" data-target="#add-set-modal">Modify Sets</button></td>' + 
-		'<td><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-danger delete-exercise-button">Delete Exercise</button></td></tr>';
+	var rowHTML = '<tr><td class="exercise-title">' + exerciseName + '</td><td class="exercise-sets" data-id="' + exerciseId + '"></td>' + 
+		'<td><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-cir btn-sm btn-primary modify-set-button" data-toggle="modal" data-target="#add-set-modal">' + 
+		'<span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
 
-	$('#logs-body').append(rowHTML);
+	$('#logs-body').append(rowHTML); 
 }
 
 function renderSets(exerciseId) {
@@ -142,7 +153,7 @@ function renderSetsModal(exerciseId) {
 	 sets.forEach(function(set) {
 	 	var set_index = state.workout[index].sets.indexOf(set);
 	 	
-	 	var setHtml = '<tr><td>' + set.reps + '</td><td>' + set.weight + '</td><td><button class="btn remove-set" data-id="' + exerciseId +'" data-set-index="' + set_index + '">Remove Set</button></tr>';
+	 	var setHtml = '<tr><td>' + set.reps + '</td><td>' + set.weight + '</td><td><button class="btn btn-sm btn-danger remove-set" data-id="' + exerciseId +'" data-set-index="' + set_index + '"><span class="glyphicon glyphicon-trash"></span></button></tr>';
 
 		setsArray.push(setHtml);
 	 });
@@ -155,6 +166,7 @@ function renderSetsModal(exerciseId) {
 	 $('#add-set-button-modal').attr('data-index', index);
 	 $('#save-sets-modal').attr('data-index', index);
 	 $('#save-sets-modal').attr('data-id', exerciseId);
+	 $('#btn-confirm-delete').attr('data-id', exerciseId);
 };
 
 //HELPER FUNCTIONS
@@ -181,28 +193,65 @@ function generateId(exerciseName) {
   return exerciseName.toUpperCase().replace(/\s/g, '-') + ':' + idInteger;
 }
 
+
+function validateInputSetsReps(reps,weight) {
+	
+	var res = true;
+
+	for(var i = 0; i < reps.length; i ++) {
+		
+		if(isNaN(reps[i])) {
+			res = false;
+		} else {}
+	};
+
+	for(var s = 0; s < weight.length; s ++) {
+		
+		if(isNaN(weight[s])) {
+			res = false;
+		} else {}
+	};
+	
+	return res;
+};
+
 //API FUNCTIONS
 
 //EVENT LISTENERS
 $(function() {
-	//Add Exercise Click
-	$('#add-exercise-button').click(function(e) {
-		e.preventDefault();
-		addExercise();
-	});
+	//Add Exercise
 
-	//Add Exercise Submit
-	$('#add-exercise-form').submit(function(e) {
-		e.preventDefault();
-		addExercise();
-	});
+		//Add Exercise Click
+		$('#add-exercise-button').click(function(e) {
+			e.preventDefault();
+			addExercise();
+		});
+
+		//Add Exercise Submit
+		$('#add-exercise-form').submit(function(e) {
+			e.preventDefault();
+			addExercise();
+		});
 
 	//Remove Exercise
-	$('#logs-body').on('click', '.delete-exercise-button', function(e) {
-		$('#logs-body').html('');
-		var exerciseId = $(this).attr('data-id');
-		removeExercise(exerciseId);
-	})
+		
+		//Reveal Warning Footer
+		$('#delete-exercise-button').click(function(e) {
+			e.preventDefault();
+			$('#delete-warning-div').removeClass('hidden');
+		});
+
+		//Confirm Delete
+		$('#btn-confirm-delete').click(function(e) {
+			e.preventDefault();
+
+			$('#logs-body').html('');
+
+			var exerciseId = $(this).attr('data-id');
+			removeExercise(exerciseId);
+
+			$('#delete-warning-div').addClass('hidden');
+		});
 
 	//Modify Sets
 	$('#logs-body').on('click', '.modify-set-button', function(e) {
@@ -249,7 +298,13 @@ $(function() {
 		var exerciseId = $(this).attr('data-id');
 		
 		removeSet(setIndex,exerciseId);
-	})
+	});
+
+	//Acknowledge Sets/Reps Input Error
+	$('.btn-notify-bad-input').click(function(e) {
+		e.preventDefault();
+		$('#bad-input-warning-div').addClass('hidden');
+	});
 });
 
                      

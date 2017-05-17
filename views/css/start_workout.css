@@ -1,5 +1,64 @@
-@media (max-width: 767px) {
+.btn-cir.btn-sm {
+    width: 35px;
+    height: 35px;
+    padding: 0px 0;
+    border-radius: 25px;
+    font-size: 20px;
+}
+
+.center {
+	text-align: center;
+}
+
+#exercise-input-label {
+	font-size: 16px;
+}
+
+#add-exercise-button {
+	font-size: 25px;
+	width: 400px;
+}
+
+.btn-delete-exercise {
+	position: relative;
+	left: 0px;
+}
+
+.btn-confirm-delete {
+	margin-top: 10px;
+}
+
+.btn-menu-toggle {
+	font-size: 20px;
+}
+
+.navbar-brand {
+	font-size: 26px;
+}
+
+.alert-warning {
+	text-align: center;
+	margin-top: 15px;
+}
+
+@media (max-width: 769px) {
 	.modal-dialog {
-		width: 350px;
+		width: 310px;
+	}
+
+	#add-exercise-button {
+		width: 240px;
+	}
+
+	.exercise-sets {
+	width: 90px;
+	}
+
+	.navbar-inverse .navbar-toggle:focus {
+		background-color: #419641;
+	}
+
+	.navbar-brand {
+	line-height: 30px;
 	}
 }
