@@ -11,10 +11,10 @@ const logSchema = mongoose.Schema({
           notes: String,
           sets:[
               {
-                time: {type:String, required:false},
-                speed_mph: {type:String, required:false},
-                speed_kph: {type:String, required:false},
-                incline: {type:String, required:false},
+                time_hours: {type:String, required:false},
+                time_minutes: {type:String, required:false},
+                time_seconds: {type:String, required:false},
+                speed: {type:String, required:false},
                 calories: {type:String, required:false},
                 reps: {type:String, required:false},
                 weight: {type:String, required:false},
