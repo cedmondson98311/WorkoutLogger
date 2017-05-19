@@ -7,12 +7,12 @@
       <!-- JQUERY -->
       <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
       <!-- BOOTSTRAP -->
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <!-- CSS -->
       <link rel="stylesheet" type="text/css" href="../css/start_workout.css">
       <!-- JAVASCRIPT -->
@@ -22,15 +22,13 @@
    <body>
       <nav class="navbar navbar-inverse">
          <div class="container-fluid">
-            
             <!-- Logo -->
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle btn-success btn-menu-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                <span class="glyphicon glyphicon-sunglasses"></span>
-              </button>
+               <button type="button" class="navbar-toggle btn-success btn-menu-toggle" data-toggle="collapse" data-target="#mainNavBar">
+               <span class="glyphicon glyphicon-sunglasses"></span>
+               </button>
                <a href="#" class="navbar-brand">Workout Logger</a>
             </div>
-
             <!-- Menu Items -->
             <div class="collapse navbar-collapse" id="mainNavBar">
                <ul class="nav navbar-nav">
@@ -49,136 +47,185 @@
                </div>
             </div>
             <div class="form-group row">
-              <div class="col-md-6">
-                <label for='category-selection'>Category</label>
-                <select class="form-control" id="category-selection">
-                  <option>Reps and Weight</option>
-                  <option>Reps Only</option>
-                  <option>Time Only</option>
-                  <option>Reps and Time</option>
-                  <option>Cardio</option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label for='equipment-selection'>Equipment</label>
-                <select class="form-control" id="equpment-selection">
-                  <option>Barbell</option>
-                  <option>Dumbell</option>
-                  <option>Cable</option>
-                  <option>Machine</option>
-                  <option>Bands</option>
-                  <option>Body Weight</option>
-                </select>
-              </div>
+               <div class="col-md-6">
+                  <label for='category-selection'>Category</label>
+                  <select class="form-control" id="category-selection">
+                     <option data-value="reps_and_weight">Reps and Weight</option>
+                     <option data-value="reps_only">Reps Only</option>
+                     <option data-value="time_only">Time Only</option>
+                     <option data-value="reps_and_time">Reps and Time</option>
+                     <option data-value="cardio">Cardio</option>
+                  </select>
+               </div>
+               <div class="col-md-6">
+                  <label for='equipment-selection'>Equipment</label>
+                  <select class="form-control" id="equipment-selection">
+                     <option>Barbell</option>
+                     <option>Dumbell</option>
+                     <option>Cable</option>
+                     <option>Machine</option>
+                     <option>Bands</option>
+                     <option>Medicine Ball</option>
+                     <option>Heavy Ball</option>
+                     <option>Body Weight</option>
+                     <optgroup label="Cardio">
+                        <option>Treadmill</option>
+                        <option>Eliptical</option>
+                        <option>Rowing Machine</option>
+                        <option>Stair Climber</option>
+                     </optgroup>
+                  </select>
+               </div>
             </div>
          </form>
          <div class="row">
-          <div class="col-md-2">
-          </div>
-          <div class="col-md-8 center">
-         <button class="btn btn-lg btn-success" id="add-exercise-button"><span class="glyphicon glyphicon-plus"></span></button>
-         </div>
-         <div class="col-md-2">
-         </div>
-         </div>
-      </div>
-      <div class="container-fluid">
-      <div class="row">
-         <div class="col-md-12" id="log-holder">
-            <table class="table table-striped" id="logs-table">
-               <thead>
-                  <tr>
-                      <th>Exercise</th>
-                      <th>Sets</th>
-                  </tr>
-               </thead>
-               <tbody id="logs-body">
-               </tbody>
-            </table>
-         </div>
-      </div>
-      <!-- Button trigger modal -->
-      <!-- Modals -->
-      <div id="modal-holder">
-      <div class="modal fade" id="add-set-modal" tabindex="-1" role="dialog" aria-labelledby="Add Sets" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="add-set-modal-title"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <div class="container-fluid">
-                     <form id="modal-form">
-                        <div class="row form-group">
-                           <div class="col-md-3">
-                              <label for="reps" placeholder="Reps">Reps</label>
-                           </div>
-                           <div class="col-md-9">
-                              <input type="text" id='reps-input-modal'>
-                           </div>
-                        </div>
-                        <div class="row form-group">
-                           <div class="col-md-3">
-                              <label for="reps" placeholder="Weight">Weight</label>
-                           </div>
-                           <div class="col-md-9">
-                              <input type="text" id='weight-input-modal'>
-                           </div>
-                        </div>
-                        <div class="row form-group">
-                           <div class="col-md-2">
-                              <label  class="hidden" for="reps" placeholder="Reps"></label>
-                           </div>
-                           <div class="col-md-4">
-                              <input  class="hidden" type="text" id='reps-input-modal'>
-                           </div>
-                           <div class="col-md-2">
-                              <label class="hidden" for="reps" placeholder="Weight">Time</label>
-                           </div>
-                           <div class="col-md-4">
-                              <input class="hidden" type="text" id='weight-input-modal'>
-                           </div>
-                        </div>
-                        <div class="row form-group">
-                          <div class="col-md-12">
-                            <div class="alert alert-warning hidden" id="bad-input-warning-div" role="alert">
-                              Please only use digits 0-9!<br><button class="btn btn-sm btn-warning btn-notify-bad-input">OK</button>
-                            </div>
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-success" id="add-set-button-modal"><span class="glyphicon glyphicon-plus"></span></button>
-                     </form>
-                  </div>
-                  <div class="row">
-                     <div class="col-md-12">
-                        <table class="table table-striped" id="table-sets-modal">
-                           <thead>
-                              <tr>
-                                 <th>Reps</th>
-                                 <th>Weight</th>
-                              </tr>
-                           </thead>
-                           <tbody id="logs-body-modal">
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" data-name="" data-id="" id="delete-exercise-button" class="btn btn-sm btn-danger btn-delete-exercise"><span class="glyphicon glyphicon-trash"></span></button>
-                  <button type="button" class="btn btn-success" id="save-sets-modal" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
-                  <div class="alert alert-warning hidden" id="delete-warning-div" role="alert">
-                    <strong>Warning!</strong> Delete this exercise?<br><button class="btn btn-sm btn-danger btn-confirm-delete" id="btn-confirm-delete" data-dismiss="modal">Confirm</button>
-                  </div>
-                    
-                  
-               </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 center">
+               <button class="btn btn-lg btn-success" id="add-exercise-button"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+            <div class="col-md-2">
             </div>
          </div>
       </div>
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-md-12" id="log-holder">
+               <table class="table table-striped" id="logs-table">
+                  <thead>
+                     <tr>
+                        <th>Exercise</th>
+                        <th>Sets</th>
+                     </tr>
+                  </thead>
+                  <tbody id="logs-body">
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12 center">
+               <button class="btn btn-large btn-success" id="button-submit-set">Log Your Workout</button>
+            </div>
+         </div>
+      </div>
+      <!-- Modals -->
+      <div id="modal-holder">
+         <div class="modal fade" id="add-set-modal" tabindex="-1" role="dialog" aria-labelledby="Add Sets" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="add-set-modal-title"></h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                  </div>
+                  <div class="modal-body">
+                     <div class="container-fluid">
+                        <form id="modal-form">
+                           <div class="row form-group" id="div-modal-input-reps">
+                              <div class="col-md-3">
+                                 <label for="reps-input-modal" placeholder="Reps">Reps</label>
+                              </div>
+                              <div class="col-md-9">
+                                 <input type="text" id='reps-input-modal'>
+                              </div>
+                           </div>
+                           <div class="row form-group" id="div-modal-input-weight">
+                              <div class="col-md-3">
+                                 <label for="weight-input-modal" placeholder="Weight">Weight</label>
+                              </div>
+                              <div class="col-md-9">
+                                 <input type="text" id='weight-input-modal'>
+                              </div>
+                           </div>
+                           <div class="row form-group hidden" id="div-modal-input-time">
+                              <div class="col-md-4">
+                                 <label for="time-input-modal" placeholder="Time">Time</label>
+                              </div>
+                              <div class="col-md-8">
+                                 <label for="time-input-modal-hours" placeholder="H">H</label>
+                                 <input type="text" size="2" maxlength="2" id="time-input-modal-hours">
+                                 <label for="time-input-modal-minutes" placeholder="M">M</label>
+                                 <input type="text" size="2" maxlength="2" id='time-input-modal-minutes'>
+                                 <label for="time-input-modal-seconds" placeholder="S">S</label>
+                                 <input type="text" size="2" maxlength="2" id='time-input-modal-seconds'>
+                              </div>
+                           </div>
+                           <div class="row form-group hidden" id="div-modal-input-calories">
+                              <div class="col-md-4">
+                                 <label for="calories-input-modal" placeholder="Calories">Calories</label>
+                              </div>
+                              <div class="col-md-8">
+                                 <input type="text" id='calories-input-modal'>
+                              </div>
+                           </div>
+                           <div class="row form-group hidden" id="div-modal-input-distance">
+                              <div class="col-md-4">
+                                 <label for="distance-input-modal" placeholder="Distance">Distance</label>
+                                 <select class="select-distance-units">
+                                    <option data-value="mi">Miles</option>
+                                    <option data-value="Yds">Yards</option>
+                                    <option data-value="Ft">Feet</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-8">
+                                 <input type="text" id='distance-input-modal'>
+                              </div>
+                           </div>
+                           <div class="row form-group hidden" id="div-modal-input-speed">
+                              <div class="col-md-4">
+                                 <label for="speed-input-modal" placeholder="Speed">Speed</label>
+                              </div>
+                              <div class="col-md-8">
+                                 <input type="text" id='speed-input-modal'>
+                              </div>
+                           </div>
+                           <div class="row form-group warning-hidden">
+                              <div class="col-md-12">
+                                 <div class="alert alert-warning hidden" id="bad-digit-warning-div" role="alert">
+                                    Please only use digits 0-9!<br><button class="btn btn-sm btn-warning btn-notify-bad-digit">OK</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-group warning-hidden">
+                              <div class="col-md-12">
+                                 <div class="alert alert-warning hidden" id="negative-digit-warning-div" role="alert">
+                                    Negative quantities are not allowed!<br><button class="btn btn-sm btn-warning btn-notify-negative-digit">OK</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row form-group warning-hidden">
+                              <div class="col-md-12">
+                                 <div class="alert alert-warning hidden" id="exceeded-sixty-warning-div" role="alert">
+                                    Minutes and seconds must be between 0 - 60!<br><button class="btn btn-sm btn-warning btn-notify-exceeded-sixty">OK</button>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-12 center">
+                                 <button type="submit" class="btn btn-sm btn-success" id="add-set-button-modal"><span class="glyphicon glyphicon-plus"></span></button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-12">
+                           <table class="table table-striped" id="table-sets-modal">
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" data-name="" data-id="" id="delete-exercise-button" class="btn btn-sm btn-danger btn-delete-exercise"><span class="glyphicon glyphicon-trash"></span></button>
+                     <button type="button" class="btn btn-success" id="save-sets-modal" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span></button>
+                     <div class="alert alert-warning hidden" id="delete-warning-div" role="alert">
+                        <strong>Warning!</strong> Delete this exercise?<br><button class="btn btn-sm btn-danger btn-confirm-delete" id="btn-confirm-delete" data-dismiss="modal">Confirm</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
    </body>
-  </div>
+   </div>
 </html>
