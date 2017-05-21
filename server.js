@@ -34,7 +34,7 @@ app.get('/user/logs', (req, res) => {
 	.find()
 	.exec()
 	.then(logs => {
-		console.log(logs)
+		console.log('this is what was returned by find(): ' + logs)
 		res.json(logs.map((log) => log.apiRepr()));
 	})
 	.catch(err => {
