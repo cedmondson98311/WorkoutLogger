@@ -418,7 +418,7 @@ function revealModalInputs(category) {
 
 //API FUNCTIONS
 function submitWorkout(state) {
-	var endpoint = 'https://fast-island-62660.herokuapp.com/user/start_workout';
+	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
 	var data = {"log":state};
 	var settings = {
 		url: endpoint,
