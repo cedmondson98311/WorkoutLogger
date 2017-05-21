@@ -101,20 +101,19 @@ describe('Logger API resource', function() {
 					res.should.be.json;
 					res.body.should.be.a('object');
 					res.body.should.include.keys('date','id','workout');
-					res.body.date.should.equal(postData.date);
+					res.body.date.should.equal(postData.log.date);
 					for(var i = 0; i < res.body.workout.length; i ++) {
-						res.body.workout[i].name.should.equal(postData.workout[i].name);
-						res.body.workout[i].equipment.should.equal(postData.workout[i].equipment);
+						res.body.workout[i].name.should.equal(postData.log.workout[i].name);
+						res.body.workout[i].equipment.should.equal(postData.log.workout[i].equipment);
 					}
 					return Logs.findById(res.body.id)
 				})
 				.then(function(log) {
-					log.date.should.equal(postData.date);
 					for(var i = 0; i < log.workout.length; i ++) {
-						log.workout[i].name.should.equal(postData.workout[i].name);
-						log.workout[i].equipment.should.equal(postData.workout[i].equipment);
-						log.workout[i].category.should.equal(postData.workout[i].category);
-						log.workout[i].notes.should.equal(postData.workout[i].notes);
+						log.workout[i].name.should.equal(postData.log.workout[i].name);
+						log.workout[i].equipment.should.equal(postData.log.workout[i].equipment);
+						log.workout[i].category.should.equal(postData.log.workout[i].category);
+						log.workout[i].notes.should.equal(postData.log.workout[i].notes);
 					}
 				});
 		});
@@ -132,12 +131,12 @@ describe('Logger API resource', function() {
 				log = _log;
 
 				return chai.request(app)
-				.delete(`/user/logs/${log.id}`);
+				.delete(`/user/logs/${log._id}`);
 			})
 			.then(function(res) {
 				
 				res.should.have.status(204);
-				return Logs.findById(log.id).exec()
+				return Logs.findById(log._id).exec()
 			})
 			.then(function(_log) {
 				should.not.exist(_log);
