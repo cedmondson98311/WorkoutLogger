@@ -418,7 +418,7 @@ function revealModalInputs(category) {
 
 //API FUNCTIONS
 function submitWorkout(state) {
-	var endpoint = 'mongodb://cory:1101762@ds115671.mlab.com:15671/workout_logger';
+	var endpoint = 'https://fast-island-62660.herokuapp.com/user/start_workout';
 	var data = {"log":state};
 	var settings = {
 		url: endpoint,
