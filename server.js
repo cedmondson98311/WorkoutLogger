@@ -90,7 +90,8 @@ app.post('/user/logs', (req, res) => {
           };
       _workout.push(_exercise);
   };*/
-  console.log(req.body.log);
+  console.log('req.body: ' + req.body);
+  console.log('req.body.log: ' + req.body.log);
   Logs
     .create(req.body.log)
     .then(log => res.status(201).json(log.apiRepr()))

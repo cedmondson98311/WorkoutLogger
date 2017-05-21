@@ -418,13 +418,14 @@ function revealModalInputs(category) {
 
 //API FUNCTIONS
 function submitWorkout(state) {
-	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
-	var data = {log:state};
+	var endpoint = 'mongodb://cory:1101762@ds115671.mlab.com:15671/workout_logger';
+	var data = {"log":state};
 	var settings = {
 		url: endpoint,
 		data: JSON.stringify(data),
 		method: 'POST',
 		dataType: 'json',
+		headers: {"Content-Type":"application/json"},
 		success:function(data){
 			alert(data.workout);
 		},
@@ -495,10 +496,8 @@ $(function() {
 	//Create Sets By Submit Event
 	$('#modal-form').submit(function(e) {
 		e.preventDefault();
-		console.log('fired');
 
 		var index = $(this).find('.add-set-button-modal').attr('data-index');
-		console.log(index);
 		var exerciseId = $(this).find('.add-set-button-modal').attr('data-id');
 
 		addSet(state, index);
