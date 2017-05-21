@@ -69,10 +69,11 @@ app.get('/user/create', (req, res) => {
 });
 
 app.post('/user/logs', (req, res) => {
-  const _workout = [];
+  /*const _workout = [];
     for (var i = 0; i < req.body.workout.length; i ++) {
       const _exercise = {
         name: req.body.workout[i].name,
+        e_id: req.body.e_id,
         equipment: req.body.workout[i].equipment,
         category: req.body.workout[i].category,
         notes: req.body.workout[i].notes,
@@ -84,23 +85,18 @@ app.post('/user/logs', (req, res) => {
             weight: req.body.workout[i].sets[s].weight,
             time: req.body.workout[i].sets[s].time,
             speed_mph: req.body.workout[i].sets[s].speed_mph,
-            speed_kph: req.body.workout[i].sets[s].speed_kph,
-            incline: req.body.workout[i].sets[s].incline,
             calories: req.body.workout[i].sets[s].calories
             };
             _exercise.sets.push(_set);
           };
       _workout.push(_exercise);
-  };
+  };*/
   Logs
-    .create({
-        date: req.body.date,
-        workout: _workout
-    })
+    .create(req.body.log)
     .then(log => res.status(201).json(log.apiRepr()))
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'Something went wrong'});
+      res.status(500).json({error: err.message});
     });
 });
 

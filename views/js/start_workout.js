@@ -9,8 +9,7 @@ var state = {
 function Excercise(){
 	this.name = '';
 	this.equipment = '';
-	this.category = '' 
-	this.notes = '';
+	this.category = '';
 	this.sets = [];
 }
 
@@ -36,7 +35,6 @@ function addExercise(state){
 	else {
 		var exerciseDisplayName = (equipment + ' ' + exerciseName);
 	};
-	var notes = $('#notes').val();
 	var id = generateId(exerciseName);
 	var newExercise = new Excercise();
 
@@ -44,8 +42,7 @@ function addExercise(state){
 	newExercise.displayName = exerciseDisplayName;
 	newExercise.equipment = equipment;
 	newExercise.category = category;
-	newExercise.notes = notes;
-	newExercise.id = id;
+	newExercise.e_id = id;
 
 	state.workout.push(newExercise);
 	renderExercise(newExercise);
@@ -58,7 +55,7 @@ function removeExercise(state, exerciseId){
 
 	state.workout.forEach(function(exercise) {
 
-		if (exercise.id != exerciseId) {
+		if (exercise.e_id != exerciseId) {
 			newWorkout.push(exercise)
 		}
 		else{}
@@ -67,7 +64,7 @@ function removeExercise(state, exerciseId){
 	state.workout = newWorkout;
 	
 	state.workout.forEach(function(exercise) {
-		var exerciseId = exercise.id;
+		var exerciseId = exercise.e_id;
 		
 		renderExercise(exercise);
 		renderSets(exerciseId);
@@ -143,14 +140,13 @@ function removeSet(state, setIndex, exerciseId) {
 //MAIN PAGE RENDER FUNCTIONS
 
 function renderExercise(exercise) {
-	var exerciseId = exercise.id;
+	var exerciseId = exercise.e_id;
 	var exerciseName = exercise.name;
 	var exerciseDisplayName = exercise.displayName;
 	var exerciseEquipment = exercise.equipment;
-	var exerciseNotes = exercise.notes;
 	
 	var rowHTML = '<tr><td class="exercise-title">' + exerciseDisplayName + '</td><td class="exercise-sets" data-id="' + exerciseId + '"></td>' + 
-		'<td><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-cir btn-sm btn-primary modify-set-button" data-toggle="modal" data-target="#add-set-modal">' + 
+		'<td class="edit-sets-button-holder"><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-cir btn-sm btn-primary modify-set-button" data-toggle="modal" data-target="#add-set-modal">' + 
 		'<span class="glyphicon glyphicon-pencil"></span></button></td></tr>';
 
 	$('#logs-body').append(rowHTML); 
@@ -305,7 +301,7 @@ function generateSetsHtml(set, category) {
 				var time = formatTime(set);
 				var distance = '(' + (set.distance_unit || '-') + ')';
 				
-				html = 'Distance: ' + (set.distance || '-') + ' ' + (distance || '-') + '<br>Time: ' + (time || '-') + '<br>Speed: ' + (set.speed || '-') + '<br>Calories: ' + (set.calories || '-');
+				html = 'Distance: ' + (set.distance || '-') + ' ' + (distance || '-') + '<br>Time: ' + (time || '-') + '<br>Speed: ' + (set.speed || '-') + '(mph)<br>Calories: ' + (set.calories || '-');
 				break;
 		};
 		
@@ -342,7 +338,7 @@ function findIndexById(exerciseId) {
 	var index;
 	 
 	state.workout.forEach(function(exercise) {
-	 	if(exercise.id === exerciseId) {
+	 	if(exercise.e_id === exerciseId) {
 	 		 index = state.workout.indexOf(exercise);
 	 	} 
 	 	else {};
@@ -462,9 +458,9 @@ $(function() {
 	$('#logs-body').on('click', '.modify-set-button', function(e) {
 		e.preventDefault();
 
-		var exercise = $(this).attr('data-id');
+		var exerciseId = $(this).attr('data-id');
 		
-		renderSetsModal(exercise);
+		renderSetsModal(exerciseId);
 	});
 
 	//Create Sets By Click Event
@@ -501,7 +497,6 @@ $(function() {
 
 	//Remove Set
 	$('#table-sets-modal').on('click','.remove-set', function(e) {
-		console.log('listener fired');
 		var setIndex = $(this).attr('data-set-index');
 		var exerciseId = $(this).attr('data-id');
 		
