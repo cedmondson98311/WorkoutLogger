@@ -417,6 +417,22 @@ function revealModalInputs(category) {
 };
 
 //API FUNCTIONS
+function submitWorkout(state) {
+	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
+	var settings = {
+		url: endpoint,
+		processData: false,
+		data: {log: state},
+		success:function(data){
+			alert(data.workout);
+		},
+		error: function(jqxhr) {
+			alert(jqxhr.responseText);
+		}
+	};
+	
+	$.ajax(settings);
+}
 
 //EVENT LISTENERS
 $(function() {
@@ -516,6 +532,12 @@ $(function() {
 		e.preventDefault();
 		$('#exceeded-sixty-warning-div').addClass('hidden');
 	});
+
+	//Submit Workout
+	$('#button-submit-workout').click(function(e) {
+		e.preventDefault();
+		submitWorkout(state);
+	})
 });
 
                      
