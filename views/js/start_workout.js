@@ -419,9 +419,10 @@ function revealModalInputs(category) {
 //API FUNCTIONS
 function submitWorkout(state) {
 	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
+	var data = {log:state};
 	var settings = {
 		url: endpoint,
-		data: {"log": JSON.stringify(state)},
+		data: JSON.stringify(data),
 		method: 'POST',
 		dataType: 'json',
 		success:function(data){

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const logSchema = mongoose.Schema({
-      id: String,
       date: String,
       workout: [
         {

@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 const {Logs} = require('./models.js');
-const {DATABASE_URL,PORT} = require('./config.js');
+const {DATABASE_URL, PORT} = require('./config.js');
 
 
 const app = express();
