@@ -421,7 +421,7 @@ function submitWorkout(state) {
 	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
 	var settings = {
 		url: endpoint,
-		data: {"log": state},
+		data: {"log": JSON.stringify(state)},
 		method: 'POST',
 		dataType: 'json',
 		success:function(data){
