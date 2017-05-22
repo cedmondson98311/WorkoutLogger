@@ -68,30 +68,6 @@ app.get('/user/create', (req, res) => {
 });
 
 app.post('/user/logs', (req, res) => {
-  /*const _workout = [];
-    for (var i = 0; i < req.body.workout.length; i ++) {
-      const _exercise = {
-        name: req.body.workout[i].name,
-        e_id: req.body.e_id,
-        equipment: req.body.workout[i].equipment,
-        category: req.body.workout[i].category,
-        notes: req.body.workout[i].notes,
-        sets: []
-      }
-       for (var s = 0; s < req.body.workout[i].sets.length; s ++) {
-            const _set = {
-            reps: req.body.workout[i].sets[s].reps,
-            weight: req.body.workout[i].sets[s].weight,
-            time: req.body.workout[i].sets[s].time,
-            speed_mph: req.body.workout[i].sets[s].speed_mph,
-            calories: req.body.workout[i].sets[s].calories
-            };
-            _exercise.sets.push(_set);
-          };
-      _workout.push(_exercise);
-  };*/
-  console.log('req.body: ' + req.body);
-  console.log('req.body.log: ' + req.body.log);
   Logs
     .create(req.body.log)
     .then(log => res.status(201).json(log.apiRepr()))

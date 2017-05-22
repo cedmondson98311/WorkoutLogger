@@ -1,12 +1,16 @@
+var state = [];
+
 function getLogs() {
 	const logsEndpoint = 'http://localhost:8080/user/logs';
 		
 		const settings = {
-			success:renderLogsBootstrap
+			success: buildCalendar
 		}
 
 	$.ajax(logsEndpoint,settings);
 }
+
+
 
 function renderLogsBootstrap(data) {
 	console.log(data);
@@ -29,6 +33,54 @@ function renderLogsBootstrap(data) {
 	
 };
 
+function renderExercise(exercise) {
+	//var exerciseId = exercise.e_id;
+	//var exerciseName = exercise.name;
+	var exerciseDisplayName = exercise.displayName;
+	//var exerciseEquipment = exercise.equipment;
+	
+	var rowHTML = '<tr><td class="exercise-title">' + exerciseDisplayName + '</td><td class="exercise-sets"</td></tr>';
+
+	$('#table-body-last-workout').append(rowHTML); 
+}
+
+function buildCalendar (_state) {
+	state = _state;
+
+	renderCalendar();
+}
+
+function generateEvents(state) {
+	var events = [];
+
+	state.forEach(function(workout) {
+		var event = {
+			title:'Workout',
+			start: workout.date
+		};
+		console.log('event: ' + event)
+		events.push(event);
+	});
+	console.log(events);
+	return events;
+};
+
+function renderCalendar() {
+	$('#calendar').fullCalendar({
+		header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,basicWeek,basicDay'
+			},
+			navLinks: true, // can click day/week names to navigate views
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			events: generateEvents(state)
+	});
+}
+
 $(function() {
+	
 	getLogs();
+
 });

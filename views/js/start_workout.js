@@ -1,6 +1,25 @@
+//PROTOTYPE FUNCTIONS
+	
+	//This is used to create a date in the 'yyyy-mm-dd' format:
+	
+	Date.prototype.yyyymmdd = function() {
+  		var mm = this.getMonth() + 1; // getMonth() is zero-based
+  		var dd = this.getDate();
+
+  		return [this.getFullYear(),
+          	(mm>9 ? '' : '0') + mm,
+          	(dd>9 ? '' : '0') + dd
+         	].join('-');
+	};
+
+function getDate () {
+	var date = new Date();
+	return date.yyyymmdd()
+};
+
 //GLOBAL VARIABLES
 var state = {
-	date: Date.now(),
+	date: getDate(),
 	workout: []
 }
 
@@ -8,8 +27,10 @@ var state = {
 
 function Excercise(){
 	this.name = '';
+	this.displayName = '';
 	this.equipment = '';
 	this.category = '';
+	this.e_id = '';
 	this.sets = [];
 }
 
@@ -36,6 +57,7 @@ function addExercise(state){
 		var exerciseDisplayName = (equipment + ' ' + exerciseName);
 	};
 	var id = generateId(exerciseName);
+	
 	var newExercise = new Excercise();
 
 	newExercise.name = exerciseName;
