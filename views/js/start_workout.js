@@ -427,7 +427,7 @@ function submitWorkout(state) {
 		dataType: 'json',
 		headers: {"Content-Type":"application/json"},
 		success:function(data){
-			alert(data.workout);
+			alert('Success! data.workout: ' + data.workout);
 		},
 		error: function(jqxhr) {
 			alert(jqxhr.responseText);
