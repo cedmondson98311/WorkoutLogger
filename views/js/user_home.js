@@ -1,69 +1,21 @@
 var state = [];
 
 function getLogs() {
-	const logsEndpoint = 'http://localhost:8080/user/logs';
+	const logsEndpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
 		
 		const settings = {
-			success: buildCalendar
+			success: renderPage
 		}
 
 	$.ajax(logsEndpoint,settings);
-}
-
-
-
-function renderLogsBootstrap(data) {
-	console.log(data);
-		
-		data[0].workout.forEach(function(exercise) {
-			var row = '<tr><td>' + exercise.name + '</td><td>';
-			var sets = exercise.sets.map(function(set) {
-				if (exercise.category === "weight_reps") {
-				return set.reps + ' X ' + set.weight + '<br>';  
-			} else if (exercise.category === "reps_only") {
-				return set.reps + '<br>'; 
-			} else if (exercise.category === "time") {
-				return "Time: " + set.time + " (minutes)<br>Calories: " + set.calories + "<br>Incline: " + set.incline;
-			}
-			});
-			var rowHtml = row + sets.join('') + '</td></tr>';
-			console.log(rowHtml);
-			$('.latest-workout tbody').append(rowHtml);
-		});
-	
 };
 
-function renderExercise(exercise) {
-	//var exerciseId = exercise.e_id;
-	//var exerciseName = exercise.name;
-	var exerciseDisplayName = exercise.displayName;
-	//var exerciseEquipment = exercise.equipment;
-	
-	var rowHTML = '<tr><td class="exercise-title">' + exerciseDisplayName + '</td><td class="exercise-sets"</td></tr>';
-
-	$('#table-body-last-workout').append(rowHTML); 
-}
-
-function buildCalendar (_state) {
+function renderPage(_state) {
 	state = _state;
-
 	renderCalendar();
-}
-
-function generateEvents(state) {
-	var events = [];
-
-	state.forEach(function(workout) {
-		var event = {
-			title:'Workout',
-			start: workout.date
-		};
-		console.log('event: ' + event)
-		events.push(event);
-	});
-	console.log(events);
-	return events;
+	renderCurrentLog();
 };
+//CALENDAR############################
 
 function renderCalendar() {
 	$('#calendar').fullCalendar({
@@ -75,9 +27,129 @@ function renderCalendar() {
 			navLinks: true, // can click day/week names to navigate views
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
-			events: generateEvents(state)
+			height: 500,
+			events: generateEvents(state),
+			eventClick: function(calEvent, jsEvent, view) {
+				renderCurrentLog(calEvent.index, calEvent.start._i);
+			}
 	});
-}
+};
+
+		function generateEvents(state) {
+			var events = [];
+
+			state.forEach(function(workout) {
+				var event = {
+					title:'Workout',
+					start: workout.date,
+					index: state.indexOf(workout)
+				};
+				events.push(event);
+			});
+			return events;
+		};
+//######################################
+
+//LOG###################################
+function renderCurrentLog (_index, date) {
+	var targetIndex = 0;
+	
+	if(_index) {
+		targetIndex = _index;
+	}
+
+	$('#table-body-last-workout').html(generateLogHtml(targetIndex));
+	$('#h2-current-log').html(date);
+};
+
+		function generateLogHtml (_index) {
+			var workout = state[_index].workout;
+
+			var rowHtmlArray = [];
+
+			workout.forEach(function(exercise) {
+				var setsHtml = generateSetsHtml(exercise.sets, exercise.category);
+				var row = '<tr><td class="name">' + exercise.equipment + ' ' + exercise.name + '</td><td>' + setsHtml + '</td></tr>';
+				rowHtmlArray.push(row);
+			});
+
+			return rowHtmlArray.join('');
+		};
+
+		function generateSetsHtml(sets, category) {
+			var htmlArray = [];
+
+			sets.forEach(function(set) {
+				var html = '';
+				switch(category) {
+					case('reps_and_weight'):
+						html = (set.reps || '-') + ' X ' + (set.weight || '-') + '<br>';
+						break;
+					case('reps_only'):
+						if(set.weight) {
+							html = (set.reps || '-') + ' X ' + set.weight + '<br>'; 
+						}
+						else{
+							html = (set.reps || '-') + '<br>';
+						};
+						break;
+					case('time_only'):
+						var time = formatTime(set);
+						html = (time || '-') + '<br>';
+						break;
+					case('reps_and_time'):
+						var time = formatTime(set);
+						html = (set.reps || '-') + ' in ' + (time || '-') + '<br>'; 
+						break;
+					case('cardio'):
+						var time = formatTime(set);
+						var distance = '(' + (set.distance_unit || '-') + ')';
+						
+						html = 'Distance: ' + (set.distance || '-') + ' ' + (distance || '-') + '<br>Time: ' + (time || '-') + '<br>Speed: ' + (set.speed || '-') + '(mph)<br>Calories: ' + (set.calories || '-');
+						break;
+				};
+				htmlArray.push(html);
+			});
+			return htmlArray.join('');
+		};
+//########################################################
+
+function formatTime(set) {
+	var hr;
+	var min;
+	var sec;
+
+	if(set.time_hours && set.time_hours !== '') {
+		hr = set.time_hours;
+	}
+	else {
+		hr = '0';
+	};
+	if(set.time_minutes && set.time_minutes !== '') {
+		if(set.time_minutes.length > 1) {
+			min = set.time_minutes;
+	 	}
+	 	else {
+	 		min = '0' + set.time_minutes;
+	 	}
+	}
+	else {
+		min = '00';
+	};
+	if(set.time_seconds && set.time_seconds !== '') {
+		if(set.time_seconds.length > 1) {
+			sec = set.time_seconds;
+		}
+		else {
+			sec = '0' + set.time_seconds;
+		}
+	}
+	else {
+	sec = '00';
+	};
+
+	return hr + ':' + min + ':' + sec;
+};
 
 $(function() {
 	

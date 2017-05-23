@@ -1,4 +1,17 @@
+@media (min-width: 1200px)
+.container-modified {
+    width: 960px;
+}
 
+@media (min-width: 992px)
+.container-modified {
+    width: 750px;
+}
+
+@media (min-width: 768px)
+.container-modified {
+    width: 520px;
+}
 
 nav.navbar.navbar-default {
     margin-bottom: 40px;
