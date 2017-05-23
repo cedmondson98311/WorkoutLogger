@@ -1,7 +1,7 @@
 var state = [];
 
 function getLogs() {
-	const logsEndpoint = 'http://localhost:8080/user/logs';
+	const logsEndpoint = '/user/logs';
 		
 		const settings = {
 			success: buildCalendar
