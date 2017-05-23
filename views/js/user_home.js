@@ -84,3 +84,5 @@ $(function() {
 	getLogs();
 
 });
+
+//test
