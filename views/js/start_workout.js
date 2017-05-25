@@ -488,10 +488,11 @@ function loadUpdateWorkout(id) {
 			state = data;
 			state.workout.forEach(function(exercise) {
 				renderExercise(exercise);
-			})
+				renderSets(exercise.e_id);
+			});
 		},
 		error: function(err) {
-			console.log(err);
+			console.error(err);
 		}
 	};
 
