@@ -50,11 +50,12 @@ function addExercise(state){
 	var exerciseName = $('#exercise').val();
 	var equipment = $('#equipment-selection option:selected').text();
 	var category = $('#category-selection option:selected').attr('data-value');
+	var exerciseDisplayName = '';
 	if(category === 'cardio') {
-		var exerciseDisplayName = exerciseName;
+		exerciseDisplayName = exerciseName;
 	}
 	else {
-		var exerciseDisplayName = (equipment + ' ' + exerciseName);
+		exerciseDisplayName = (equipment + ' ' + exerciseName);
 	};
 	var id = generateId(exerciseName);
 	
@@ -438,12 +439,32 @@ function revealModalInputs(category) {
 	};
 };
 
+function getQueryStringParameters() {
+	var queryStrParams = {
+		params:[],
+		hash:[]
+	}
+
+    var q = document.URL.split('?')[1];
+    if(q != undefined){
+        q = q.split('&');
+        for(var i = 0; i < q.length; i++){
+            queryStrParams.hash = q[i].split('=');
+            queryStrParams.params.push(queryStrParams.hash[1]);
+            queryStrParams.params[queryStrParams.hash[0]] = queryStrParams.hash[1];
+        }
+	}
+
+	return queryStrParams
+};
+
 //API FUNCTIONS
 function submitWorkout(state) {
-	var endpoint = 'https://fast-island-62660.herokuapp.com/user/logs';
+	
 	var data = {"log":state};
+	
 	var settings = {
-		url: endpoint,
+		url: 'https://fast-island-62660.herokuapp.com/user/logs',
 		data: JSON.stringify(data),
 		method: 'POST',
 		dataType: 'json',
@@ -458,6 +479,24 @@ function submitWorkout(state) {
 	
 	$.ajax(settings);
 }
+
+function loadUpdateWorkout(id) {
+	var settings = {
+		url: '/user/logs/' + id,
+		method: 'GET',
+		success:function(data){
+			state = data;
+			state.workout.forEach(function(exercise) {
+				renderExercise(exercise);
+			})
+		},
+		error: function(err) {
+			console.log(err);
+		}
+	};
+
+	$.ajax(settings);
+};
 
 //EVENT LISTENERS
 $(function() {
@@ -504,27 +543,29 @@ $(function() {
 		renderSetsModal(exerciseId);
 	});
 
-	//Create Sets By Click Event
-	$('#add-set-button-modal').click(function(e) {
-		e.preventDefault();
+	//Create Sets
 
-		var index = $(this).attr('data-index');
-		var exerciseId = $(this).attr('data-id');
+		//Create Sets by Click Event
+		$('#add-set-button-modal').click(function(e) {
+			e.preventDefault();
 
-		addSet(state, index);
-		renderSetsModal(exerciseId);
-	});
+			var index = $(this).attr('data-index');
+			var exerciseId = $(this).attr('data-id');
 
-	//Create Sets By Submit Event
-	$('#modal-form').submit(function(e) {
-		e.preventDefault();
+			addSet(state, index);
+			renderSetsModal(exerciseId);
+		});
 
-		var index = $(this).find('.add-set-button-modal').attr('data-index');
-		var exerciseId = $(this).find('.add-set-button-modal').attr('data-id');
+		//Create Sets By Submit Event
+		$('#modal-form').submit(function(e) {
+			e.preventDefault();
 
-		addSet(state, index);
-		renderSetsModal(exerciseId);
-	});
+			var index = $(this).find('.add-set-button-modal').attr('data-index');
+			var exerciseId = $(this).find('.add-set-button-modal').attr('data-id');
+
+			addSet(state, index);
+			renderSetsModal(exerciseId);
+		});
 
 	//Save Sets
 	$('#save-sets-modal').click(function(e) {
@@ -560,8 +601,17 @@ $(function() {
 	$('#button-submit-workout').click(function(e) {
 		e.preventDefault();
 		submitWorkout(state);
-	})
-});
+	});
+
+	//UPDATE SECTION
+	//this code will cause the page to be populated with a previous workout that
+	//can be updated if the url is called with an 'id' query string parameter
+	state.queryStrParams = getQueryStringParameters();
+
+	if(state.queryStrParams.params['id']) {
+		loadUpdateWorkout(state.queryStrParams.params['id']);
+	}
+}); 
 
 //test
                      

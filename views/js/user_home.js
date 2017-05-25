@@ -60,7 +60,7 @@ function renderCurrentLog (_index, date) {
 	}
 
 	$('#table-body-last-workout').html(generateLogHtml(targetIndex));
-	$('#h2-current-log').html(date);
+	$('#h2-current-log').html((date || 'Your Last Workout') + '<button class="btn btn-lg btn-primary" id="update-button">Update</button>');
 };
 
 		function generateLogHtml (_index) {
@@ -157,5 +157,3 @@ $(function() {
 	getLogs();
 
 });
-
-//test
