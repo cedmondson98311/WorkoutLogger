@@ -484,7 +484,7 @@ function updateWorkout(state) {
 	
 	var settings = {
 		url: 'https://fast-island-62660.herokuapp.com/user/logs/' + state.id,
-		data: JSON.stringify(data),
+		data: JSON.stringify(state),
 		method: 'PUT',
 		dataType: 'json',
 		headers: {"Content-Type":"application/json"},
