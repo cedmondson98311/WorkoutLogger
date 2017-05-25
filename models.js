@@ -5,6 +5,7 @@ const logSchema = mongoose.Schema({
       workout: [
         {
           name: String,
+          displayName: String,
           e_id: String,
           equipment: String,
           category: String,
