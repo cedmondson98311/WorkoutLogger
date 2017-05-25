@@ -480,6 +480,25 @@ function submitWorkout(state) {
 	$.ajax(settings);
 }
 
+function updateWorkout(state) {
+	
+	var settings = {
+		url: 'https://fast-island-62660.herokuapp.com/user/logs/' + state.id,
+		data: JSON.stringify(data),
+		method: 'PUT',
+		dataType: 'json',
+		headers: {"Content-Type":"application/json"},
+		success:function(data){
+			alert('Success! data.workout: ' + data.workout);
+		},
+		error: function(jqxhr) {
+			alert(jqxhr.responseText);
+		}
+	};
+	
+	$.ajax(settings);
+}
+
 function loadUpdateWorkout(id) {
 	var settings = {
 		url: '/user/logs/' + id,
@@ -490,6 +509,8 @@ function loadUpdateWorkout(id) {
 				renderExercise(exercise);
 				renderSets(exercise.e_id);
 			});
+			$('#button-submit-workout').addClass('hidden');
+			$('#button-update-workout').removeClass('hidden');
 		},
 		error: function(err) {
 			console.error(err);
@@ -612,6 +633,11 @@ $(function() {
 	if(state.queryStrParams.params['id']) {
 		loadUpdateWorkout(state.queryStrParams.params['id']);
 	}
+
+	$('#button-update-workout').click(function(e) {
+		e.preventDefault();
+		updateWorkout(state);
+	})
 }); 
 
 //test
