@@ -59,6 +59,10 @@ app.get('/user/start_workout', (req, res) => {
 	res.sendFile(__dirname + '/views/html/start_workout.html');
 });
 
+app.get('/user/start_workout/:id', (req, res) => {
+  res.sendFile(__dirname + '/views/html/start_workout.html');
+});
+
 app.get('/user/workout', (req, res) => {
 	res.sendFile(__dirname + '/views/html/workout.html')
 });

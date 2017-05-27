@@ -59,8 +59,10 @@ function renderCurrentLog (_index, date) {
 		targetIndex = _index;
 	}
 
+	var workoutId = state[targetIndex].id;
+
 	$('#table-body-last-workout').html(generateLogHtml(targetIndex));
-	$('#h2-current-log').html((date || 'Your Last Workout') + '<button class="btn btn-lg btn-primary" id="update-button">Update</button>');
+	$('#h2-current-log').html((date || 'Your Last Workout') + '<a class="btn btn-info" id="edit-button" href="/user/start_workout?id=' + workoutId +'">Edit</a>');
 };
 
 		function generateLogHtml (_index) {
@@ -155,5 +157,12 @@ function formatTime(set) {
 $(function() {
 	
 	getLogs();
+
+	$('#h2-current-log').on('click', '#e', function(e) {
+		e.preventDefault();
+		console.log('event fired');
+		var id = $('#edit-button').attr('data-id');
+		location.href='localhost:8080/user/submit_workout?id=' + id;
+	})
 
 });

@@ -511,6 +511,7 @@ function loadUpdateWorkout(id) {
 			});
 			$('#button-submit-workout').addClass('hidden');
 			$('#button-update-workout').removeClass('hidden');
+			$('#btn-delete-workout').removeClass('hidden');
 		},
 		error: function(err) {
 			console.error(err);
@@ -518,6 +519,19 @@ function loadUpdateWorkout(id) {
 	};
 
 	$.ajax(settings);
+};
+
+function deleteWorkout(id) {
+	var settings = {
+		url: '/user/logs/' + id,
+		method: 'DELETE',
+		success: function(data) {
+			alert('workout deleted!');
+		},
+		error: function(err) {
+			console.error(err);
+		}
+	};
 };
 
 //EVENT LISTENERS
@@ -637,6 +651,16 @@ $(function() {
 	$('#button-update-workout').click(function(e) {
 		e.preventDefault();
 		updateWorkout(state);
+	});
+
+	$('#btn-delete-workout').click(function(e) {
+		e.preventDefault();
+		$('.div-delete-well').removeClass('hidden');
+	});
+
+	$('#btn-delete-well').click(function(e) {
+		e.preventDefault();
+		deleteWorkout(state.queryStrParams.params['id']);
 	})
 }); 
 
