@@ -1,7 +1,49 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+mongoose.Promise = global.Promise;
+
+const UserSchema = mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  firstName: {type: String, default: ""},
+  lastName: {type: String, default: ""}
+});
+
+UserSchema.methods.apiRepr = function() {
+  return {
+    username: this.username || '',
+    firstName: this.firstName || '',
+    lastName: this.lastName || ''
+  };
+}
+
+UserSchema.methods.validatePassword = function(password) {
+
+  return bcrypt
+    .compare(password, this.password)
+    .then(isValid => {
+    	console.log(isValid);
+    	return isValid
+    });
+}
+
+UserSchema.statics.hashPassword = function(password) {
+  return bcrypt
+    .hash(password, 10)
+    .then(hash => hash);
+}
 
 const logSchema = mongoose.Schema({
       date: String,
+      username: String,
       workout: [
         {
           name: String,
@@ -32,10 +74,12 @@ logSchema.methods.apiRepr = function() {
   return {
     id: this._id,
     date: this.date,
-    workout: this.workout
+    workout: this.workout,
+    username: this.username
   };
 }
 
+const User = mongoose.model('User', UserSchema);
 const Logs = mongoose.model('log', logSchema);
 
-module.exports = {Logs};
+module.exports = {User, Logs};

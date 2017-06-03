@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Workout Logger - Index</title>
+	<title>Workout Logger - Landing Page</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script
@@ -16,14 +16,110 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="../css/index.css">
+<!-- JAVASCRIPT -->
+<script type="text/javascript" src="../js/index.js"></script>
 </head>
+<nav class="navbar navbar-inverse">
+         <div class="container-fluid">
+            <!-- Logo -->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle btn-success btn-menu-toggle" data-toggle="collapse" data-target="#mainNavBar">
+               <span class="glyphicon glyphicon-sunglasses"></span>
+               </button>
+               <a href="#" class="navbar-brand">Workout Logger(BETA)</a>
+            </div>
+            <!-- Menu Items -->
+            <div class="collapse navbar-collapse" id="mainNavBar">
+               <ul class="nav navbar-nav navbar-right">
+               <li><a class="signup-login" href="/">Sign Up/Log in</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+<div class="container main">
+
 <body>
 <div class="container">
-<h1>Welcom to Workout Logger</h1>
-<p>Hello World from Workout Logger!</p>
-<a href="/user">CLICK HERE TO GO TO YOUR HOMEPAGE</a>
+	<div class="row">
+		<div class="col-md-12">
+		<h3>Don't Skip Leg Day - A flexible workout tracker and logger</h3>
+		</div>
+	</div>
+	<div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-login">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="#" class="active" id="login-form-link">Login</a>
+              </div>
+              <div class="col-xs-6">
+                <a href="#" id="register-form-link">Register</a>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="panel-body">
+          <div id="account-created" class="alert alert-success hidden">
+              Your account has been created! You may login now.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <form id="login-form" role="form" style="display: block;">
+                  <div class="form-group">
+                    <input type="text" required="true" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" required="true" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" type="submit" value="Log In">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+              
+            </div>
+                </form>
+                <form id="register-form" action="#" role="form" style="display: none;">
+                  <div class="form-group">
+                    <input type="text" required="true" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="First Name" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="email" required="true" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" required="true" name="username" id="register-username" tabindex="1" class="form-control" placeholder="Username" value="">
+                  </div>
+              
+                  <div class="form-group">
+                    <input type="password" required="true" name="password" id="register-password" tabindex="2" class="form-control" placeholder="Password">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" required="true" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                      <div class="col-sm-6 col-sm-offset-3">
+                        <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
-
 </body>
-
+</div>
 </html>

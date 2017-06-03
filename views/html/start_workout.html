@@ -18,8 +18,8 @@
       <!-- JAVASCRIPT -->
       <script type="text/javascript" src="../js/start_workout.js"></script>
    </head>
-   <div class="container">
    <body>
+   <div class="container">
       <nav class="navbar navbar-inverse">
          <div class="container-fluid">
             <!-- Logo -->
@@ -27,20 +27,27 @@
                <button type="button" class="navbar-toggle btn-success btn-menu-toggle" data-toggle="collapse" data-target="#mainNavBar">
                <span class="glyphicon glyphicon-sunglasses"></span>
                </button>
-               <a href="#" class="navbar-brand">Workout Logger</a>
+               <a href="/" class="navbar-brand">Workout Logger</a>
             </div>
             <!-- Menu Items -->
             <div class="collapse navbar-collapse" id="mainNavBar">
                <ul class="nav navbar-nav">
-               <li><a href="https://fast-island-62660.herokuapp.com/user/user_home">Home</a></li>
-               <li><a href="https://fast-island-62660.herokuapp.com/user/view_logs">Logs</a></li>
-               <li class="active"><a href="https://fast-island-62660.herokuapp.com/user/start_workout">Start Workout</a></li>
+               <li><a id="menu_user_home" href="/user/user_home">Home</a></li>
+               <li class="active"><a id="menu_start_workout" href="/user/start_workout">Start Workout</a></li>
+               </ul>
+               <ul class="nav navbar-nav navbar-right">
+               <li><a href="/logout">Logout</a></li>
+               </ul>
             </div>
          </div>
       </nav>
       <div class="container-fluid">
          <form id="add-exercise-form">
             <div class="form-group row">
+               <div class="alert alert-success new-user hidden" role="name-explain">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  Begin by adding a name for your exercise. You may name your exercise whatever you want.
+               </div>
                <label for="exercise" id="exercise-input-label" class="col-md-2 col-form-label">Exercise</label>
                <div class="col-md-10">
                   <input type="text" class="form-control" id="exercise" placeholder="e.g. Bench Press">
@@ -57,24 +64,40 @@
                      <option data-value="cardio">Cardio</option>
                   </select>
                </div>
+               
                <div class="col-md-6">
                   <label for='equipment-selection'>Equipment</label>
                   <select class="form-control" id="equipment-selection">
-                     <option>Barbell</option>
-                     <option>Dumbell</option>
-                     <option>Cable</option>
-                     <option>Machine</option>
-                     <option>Bands</option>
-                     <option>Medicine Ball</option>
-                     <option>Heavy Ball</option>
-                     <option>Body Weight</option>
+                     <option>None</option>
+                     <optgroup label="Resistance">
+	                     <option>Barbell</option>
+	                     <option>Dumbell</option>
+	                     <option>Cable</option>
+	                     <option>Machine</option>
+	                     <option>Bands</option>
+	                     <option>Medicine Ball</option>
+	                     <option>Heavy Ball</option>
+	                     <option>Body Weight</option>
+	                 </optgroup>
                      <optgroup label="Cardio">
                         <option>Treadmill</option>
                         <option>Eliptical</option>
+                        <option>Stationary Bike</option>
+                        <option>Track</option>
+                        <option>Pool</option>
                         <option>Rowing Machine</option>
                         <option>Stair Climber</option>
+                        <option>Ladder Climber</option>
+                        <option>Hand Bike</option>
+                        <option>Other</option>
                      </optgroup>
                   </select>
+               </div>
+            </div>
+            <div class="row">
+               <div class="alert alert-success new-user hidden" role="name-explain">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  Be sure to select the right category and equipment for each exercise. Press the large green "plus" button below to add exercises. If the exercise is a cardio exercise, the equipment used will not be added to the name of the exercise in the log. 
                </div>
             </div>
          </form>
@@ -111,6 +134,10 @@
             </div>
          </div>
          <div class="row">
+            <div class="alert alert-success new-user hidden" role="name-explain">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  After you have added an exercise, you may add sets by pressing the blue pencil button in the row for that exercise.
+               </div>
             <div class="col-md-12 center alert alert-danger div-delete-well hidden">
             Are you sure you want to delete this workout?<br><br><button class="btn btn-lg btn-warning">Cancel</button><button class="btn btn-lg btn-danger" id="btn-delete-well">Delete</button>
             </div>
@@ -122,15 +149,20 @@
             <div class="modal-dialog" role="document">
                <div class="modal-content">
                   <div class="modal-header">
-                     <h5 class="modal-title" id="add-set-modal-title"></h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                      </button>
+                     <h5 class="modal-title" id="add-set-modal-title"></h5>
+                     
                   </div>
                   <div class="modal-body">
                      <div class="container-fluid">
                         <form id="modal-form">
                            <div class="row form-group" id="div-modal-input-reps">
+                              <div class="alert alert-success new-user hidden" role="name-explain">
+                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                 Press the large green "plus" button below to add a set to the exercise.
+                              </div>
                               <div class="col-md-3">
                                  <label for="reps-input-modal" placeholder="Reps">Reps</label>
                               </div>
@@ -196,6 +228,7 @@
                               </div>
                            </div>
                            <div class="row form-group warning-hidden">
+                              
                               <div class="col-md-12">
                                  <div class="alert alert-warning hidden" id="negative-digit-warning-div" role="alert">
                                     Negative quantities are not allowed!<br><button class="btn btn-sm btn-warning btn-notify-negative-digit">OK</button>
@@ -221,6 +254,13 @@
                            <table class="table table-striped" id="table-sets-modal">
                            </table>
                         </div>
+                        
+                     </div>
+                     <div class="row">
+                        <div class="alert alert-success new-user hidden" role="name-explain">
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                           Press the red trash can button at the right of a set to remove that set, or press the red button at the bottom of the modal to remove the exercise entirely from the log.
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -233,6 +273,6 @@
                </div>
             </div>
          </div>
-   </body>
    </div>
+   </body>
 </html>

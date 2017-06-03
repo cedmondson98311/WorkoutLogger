@@ -20,8 +20,12 @@ function getDate () {
 //GLOBAL VARIABLES
 var state = {
 	date: getDate(),
-	workout: []
-}
+	workout: [],
+	queryStrParams: getQueryStringParameters()
+};
+
+const username = state.queryStrParams.params['username'];
+state.username = username;
 
 //CREATE FUNCTIONS
 
@@ -51,7 +55,7 @@ function addExercise(state){
 	var equipment = $('#equipment-selection option:selected').text();
 	var category = $('#category-selection option:selected').attr('data-value');
 	var exerciseDisplayName = '';
-	if(category === 'cardio') {
+	if(category === 'cardio' || equipment === 'None') {
 		exerciseDisplayName = exerciseName;
 	}
 	else {
@@ -166,7 +170,6 @@ function renderExercise(exercise) {
 	var exerciseId = exercise.e_id;
 	var exerciseName = exercise.name;
 	var exerciseDisplayName = exercise.displayName;
-	var exerciseEquipment = exercise.equipment;
 	
 	var rowHTML = '<tr><td class="exercise-title">' + exerciseDisplayName + '</td><td class="exercise-sets" data-id="' + exerciseId + '"></td>' + 
 		'<td class="edit-sets-button-holder"><button type="button" data-name="' + exerciseName + '" data-id="' + exerciseId + '" class="btn btn-cir btn-sm btn-primary modify-set-button" data-toggle="modal" data-target="#add-set-modal">' + 
@@ -483,7 +486,7 @@ function submitWorkout(state) {
 function updateWorkout(state) {
 	
 	var settings = {
-		url: 'https://fast-island-62660.herokuapp.com/user/logs/' + state.id,
+		url: '/user/logs/' + state.id,
 		data: JSON.stringify(state),
 		method: 'PUT',
 		dataType: 'json',
@@ -504,7 +507,9 @@ function loadUpdateWorkout(id) {
 		url: '/user/logs/' + id,
 		method: 'GET',
 		success:function(data){
+			console.log(data);
 			state = data;
+			state.queryStrParams = getQueryStringParameters();
 			state.workout.forEach(function(exercise) {
 				renderExercise(exercise);
 				renderSets(exercise.e_id);
@@ -639,11 +644,20 @@ $(function() {
 		submitWorkout(state);
 	});
 
-	//UPDATE SECTION
-	//this code will cause the page to be populated with a previous workout that
-	//can be updated if the url is called with an 'id' query string parameter
-	state.queryStrParams = getQueryStringParameters();
+	//Display new-user alerts for first-time users to give directions on using the app
+	if(state.queryStrParams.params['new_user'] === 'true') {
+		$('.new-user').removeClass('hidden');
+		$('#menu_user_home').attr('href', '/user/user_home?username=' + username + '&new_user=true');
+		$('#menu_start_workout').attr('href', '/user/start_workout?username=' + username + '&new_user=true')
+	}
+	else {
+	$('#menu_user_home').attr('href', '/user/user_home?username=' + username);
+	$('#menu_start_workout').attr('href', '/user/start_workout?username=' + username)
+	}
 
+	//UPDATE SECTION
+	//this section will cause the page to be populated with a previous workout that
+	//can be updated if the url is called with an 'id' query string parameter
 	if(state.queryStrParams.params['id']) {
 		loadUpdateWorkout(state.queryStrParams.params['id']);
 	}

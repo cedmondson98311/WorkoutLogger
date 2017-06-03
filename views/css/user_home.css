@@ -1,26 +1,75 @@
-@media (min-width: 1200px)
-.container-modified {
-    width: 960px;
+body {
+	background-color: #373f46;
 }
 
-@media (min-width: 992px)
-.container-modified {
-    width: 750px;
-}
-
-@media (min-width: 768px)
-.container-modified {
-    width: 520px;
+h2, th {
+	color: #9d9d9d;
 }
 
 nav.navbar.navbar-default {
     margin-bottom: 40px;
 }
 
-.table {
-	font-size: 16px;
+table {
+	font-size: 18px;
+}
+
+h2#greeting {
+    margin-bottom: 25px;
 }
 
 #edit-button {
 	margin-left: 15px;
+}
+
+.center {
+	text-align: center;
+}
+
+.navbar-brand {
+	font-size: 26px;
+}
+
+.btn-menu-toggle {
+	font-size: 20px;
+}
+
+.fc-content {
+	text-align: center;
+	font-size: 28px;
+}
+
+span.fc-title.glyphicon.glyphicon-ok-sign {
+    width: 28px;
+    margin-top: 6px;
+}
+
+td.fc-day.fc-widget-content.fc-past {
+    background-color: white;
+}
+
+td.fc-day.fc-widget-content.fc-other-month.fc-future {
+    background-color: white;
+}
+
+td, td.name {
+    background-color: white;
+}
+
+@media (max-width: 361px) {
+
+	.navbar-brand {
+		line-height: 30px;
+	}
+
+	.container {
+		padding-right: 5px;
+    	padding-left: 5px;
+    	margin-right: auto;
+    	margin-left: auto;
+	}
+
+	table {
+		font-size: 18px;
+	}
 }
