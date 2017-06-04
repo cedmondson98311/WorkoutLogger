@@ -127,7 +127,7 @@ app.put('/logs/:id', ensureAuthenticated, (req, res) => {
 });
 		
 		//USER CREATE ENPOINT
-     	app.post('/user_create', ensureAuthenticated, (req, res) => {
+     	app.post('/user_create', (req, res) => {
 		  if (!req.body) {
 		    return res.status(400).json({message: 'No request body'});
 		  }

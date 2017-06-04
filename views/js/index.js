@@ -75,10 +75,12 @@ $(function() {
 			data: _data,
 			success: function(data) {
 				newUser = true;
+				console.log(data.status);
 				$('#account-created').removeClass('hidden');
 			},
 			error: function(data) {
 				var alertMessage = '';
+				console.log(data.status);
 				if(data.status === 422) alertMessage = 'Username is already taken';
 
 				alert(alertMessage);
