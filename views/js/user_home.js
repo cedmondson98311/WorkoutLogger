@@ -9,7 +9,7 @@ const username = state.queryStrParams.params['username'];
 //API Functions
 function getLogs() {
 
-	const logsEndpoint = '/user/logs/user/' + username;
+	const logsEndpoint = '/logs/user/' + username;
 		
 		const settings = {
 			success: function(data) {
@@ -68,7 +68,7 @@ function generateEvents(state) {
 };
 
 function renderCurrentLog (_index, date) {
-	var targetIndex = 0;
+	var targetIndex = (state.workouts.length - 1);
 	
 	if(_index) {
 		targetIndex = _index;
@@ -93,7 +93,7 @@ function generateLogHtml (_index) {
 
 	workout.forEach(function(exercise) {
 		var setsHtml = generateSetsHtml(exercise.sets, exercise.category);
-		var row = '<tr><td class="name">' + exercise.equipment + ' ' + exercise.name + '</td><td>' + setsHtml + '</td></tr>';
+		var row = '<tr><td class="name">' + exercise.equipment + ' ' + exercise.name + '</td><td class="sets">' + setsHtml + '</td></tr>';
 		rowHtmlArray.push(row);
 	});
 
@@ -202,7 +202,7 @@ $(function() {
 	$('#h2-current-log').on('click', '#e', function(e) {
 		e.preventDefault();
 		var id = $('#edit-button').attr('data-id');
-		location.href='localhost:8080/user/submit_workout?id=' + id;
+		location.href='localhost:8080/user/submit_workout?id=' + id + '&username=' + username;
 	});
 	if(state.queryStrParams.params['new_user'] === 'true') {
 		$('.new-user').removeClass('hidden');

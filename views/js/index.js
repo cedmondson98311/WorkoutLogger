@@ -21,7 +21,6 @@ $(function() {
 
 	$('#login-form').submit(function(e) {
 		e.preventDefault();
-		console.log('login fired')
 		
 		var	username = $('#username').val();
 		var password = $('#password').val();

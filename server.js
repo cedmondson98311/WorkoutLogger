@@ -56,8 +56,7 @@ app.get('/login', (req, res) => {
 });
 
 //API ENDPOINTS
-app.get('/user/logs/user/:username', (req, res) => {
-	
+app.get('/logs/user/:username', ensureAuthenticated, (req, res) => {
 	Logs
 	.find({"username":req.params.username})
 	.exec()
@@ -70,7 +69,8 @@ app.get('/user/logs/user/:username', (req, res) => {
 	});
 });
 
-app.get('/user/logs/:id', (req, res) => {
+app.get('/logs/:id', ensureAuthenticated, (req, res) => {
+  
   Logs
     .findOne({"_id":req.params.id})
     .exec()
@@ -83,17 +83,18 @@ app.get('/user/logs/:id', (req, res) => {
     });
 });
 
-app.post('/user/logs', (req, res) => {
+app.post('/logs', ensureAuthenticated, (req, res) => {
   Logs
     .create(req.body.log)
-    .then(log => res.status(201).json(log.apiRepr()))
+    .then(log => {
+      res.status(201).json(log.apiRepr());
+    })
     .catch(err => {
-      console.error(err);
       res.status(500).json({error: err.message});
     });
 });
 
-app.delete('/user/logs/:id', (req, res) => {
+app.delete('/logs/:id', ensureAuthenticated, (req, res) => {
   Logs
     .findByIdAndRemove(req.params.id)
     .exec()
@@ -101,12 +102,11 @@ app.delete('/user/logs/:id', (req, res) => {
       res.status(204).json({message: 'success'});
     })
     .catch(err => {
-      console.error(err);
       res.status(500).json({error: 'something went terribly wrong'});
     });
 });
 
-app.put('/user/logs/:id', (req, res) => {
+app.put('/logs/:id', ensureAuthenticated, (req, res) => {
   if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
     res.status(400).json({
       error: 'The request path id and request body id must match'
@@ -127,8 +127,7 @@ app.put('/user/logs/:id', (req, res) => {
 });
 		
 		//USER CREATE ENPOINT
-     	app.post('/user_create', (req, res) => {
-     		console.log(req.body);
+     	app.post('/user_create', ensureAuthenticated, (req, res) => {
 		  if (!req.body) {
 		    return res.status(400).json({message: 'No request body'});
 		  }
@@ -188,11 +187,9 @@ app.put('/user/logs/:id', (req, res) => {
 		        })
 		    })
 		    .then(user => {
-          console.log(user);
 		      return res.status(201).json(user.apiRepr());
 		    })
 		    .catch(err => {
-          console.log(err);
 		      if (err.name === 'AuthenticationError') {
 		        return res.status(422).json({message: err.message});
 		      }
@@ -228,8 +225,7 @@ const basicStrategy = new BasicStrategy(function(username, password, done) {
 passport.use(basicStrategy);
 
 app.post('/login', passport.authenticate('basic', {session: true}), (req, res) => {
-  console.log('test');
-  res.redirect('/user/user_home')
+  res.status(200).json({'message':'login successful'});
 });
 
 app.get('/logout', function(req, res){
@@ -241,7 +237,7 @@ function ensureAuthenticated(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	} else {
-		res.json({"message":"you are not authorized"});
+		res.redirect('/');
 	}
 };
 

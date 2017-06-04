@@ -467,13 +467,13 @@ function submitWorkout(state) {
 	var data = {"log":state};
 	
 	var settings = {
-		url: 'https://fast-island-62660.herokuapp.com/user/logs',
+		url: '/logs',
 		data: JSON.stringify(data),
 		method: 'POST',
 		dataType: 'json',
 		headers: {"Content-Type":"application/json"},
 		success:function(data){
-			alert('Success! data.workout: ' + data.workout);
+			window.location = '/user/user_home?username=' + username;
 		},
 		error: function(jqxhr) {
 			alert(jqxhr.responseText);
@@ -486,13 +486,13 @@ function submitWorkout(state) {
 function updateWorkout(state) {
 	
 	var settings = {
-		url: '/user/logs/' + state.id,
+		url: '/logs/' + state.id,
 		data: JSON.stringify(state),
 		method: 'PUT',
 		dataType: 'json',
 		headers: {"Content-Type":"application/json"},
 		success:function(data){
-			alert('Success! data.workout: ' + data.workout);
+			window.location = '/user/user_home?username=' + username;
 		},
 		error: function(jqxhr) {
 			alert(jqxhr.responseText);
@@ -504,7 +504,7 @@ function updateWorkout(state) {
 
 function loadUpdateWorkout(id) {
 	var settings = {
-		url: '/user/logs/' + id,
+		url: '/logs/' + id,
 		method: 'GET',
 		success:function(data){
 			console.log(data);
@@ -528,15 +528,16 @@ function loadUpdateWorkout(id) {
 
 function deleteWorkout(id) {
 	var settings = {
-		url: '/user/logs/' + id,
+		url: '/logs/' + id,
 		method: 'DELETE',
 		success: function(data) {
-			alert('workout deleted!');
+			window.location = '/user/user_home';
 		},
 		error: function(err) {
 			console.error(err);
 		}
 	};
+	$.ajax(settings);
 };
 
 //EVENT LISTENERS
@@ -674,6 +675,7 @@ $(function() {
 
 	$('#btn-delete-well').click(function(e) {
 		e.preventDefault();
+		console.log('delete fired');
 		deleteWorkout(state.queryStrParams.params['id']);
 	})
 }); 
