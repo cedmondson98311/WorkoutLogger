@@ -47,10 +47,10 @@ describe('Logger API resource', function() {
 	//	return tearDownDb();
 	//});
 
-	after(function() {
-		tearDownDb();
-		return closeServer();
-	});
+	//after(function() {
+		//tearDownDb();
+	//	return closeServer();
+	//});
 
 	describe('GET endpoint', function() {
 		it('should return index.html on request to root directory', function() {
@@ -61,7 +61,7 @@ describe('Logger API resource', function() {
 				res.should.have.header('content-type', 'text/html; charset=UTF-8');
 			})
 		});
-		it('should return all user logs for user \'test\' on request to /logs/user/:username', function() {
+		/*it('should return all user logs for user \'test\' on request to /logs/user/:username', function() {
 			
 			let res;
 			
@@ -182,7 +182,8 @@ describe('Logger API resource', function() {
 					log.workout.should.equal(updateData.workout);
 			});
 		});
-	});
+	}); */
+});
 });
 
 
